@@ -1,17 +1,25 @@
-// src/app/dashboard/page.tsx
-import React from 'react';
-import Head from 'next/head';
-import styles from './page.module.css';
+import { redirect } from "next/navigation";
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import DashboardClient from "@/app/dashboard/DashboardClient";
 
-const Dashboard = () => {
-  return (
-    <div className={styles.container}>
-      <Head>
-        <title>Meu painel de tarefas</title>
-      </Head>
-      <h1>Meu Painel</h1>
-    </div>
-  );
-};
 
-export default Dashboard;
+// app/pagina/page.tsx
+export const metadata = {
+  title: 'Minhas tarefas',
+}
+interface HomeProps {
+  user: {
+    email: string;
+  }
+}
+
+export default async function DashboardPage({user}: HomeProps) {
+  const session = await getServerSession(authOptions);
+
+  if (!session) {
+    redirect("/");
+  }
+
+  return <DashboardClient session={session}/>;
+}
