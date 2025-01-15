@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import TaskComponent from "./TaskComponent";
 import { db } from "@/services/firebaseConnection";
 import { doc, getDoc, query, collection, where, getDocs } from "firebase/firestore";
+import { PageProps } from "next/types";
 
 // Tipo de comentário
 interface CommentProps {
@@ -60,7 +61,8 @@ async function fetchTaskData(id: string) {
 const Page = async ({
   params,
 }: {
-  params: { id: string }
+  params: { id: string },
+  searchParams?: { [key: string]: string | string[] | undefined }
 }) => {
   const task = await fetchTaskData(params.id);
   return <TaskComponent task={task} allComments={task.allComments} />;
