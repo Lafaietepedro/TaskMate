@@ -5,6 +5,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    border-bottom: 1px solid #4d4d4d;
 }
 
 .content {
@@ -26,7 +27,7 @@
 }
 
 .logo span {
-    color: #ea3140;
+    color: #3183ff;
     padding-left: 2px;
 }
 

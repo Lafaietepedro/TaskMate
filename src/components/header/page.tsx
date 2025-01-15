@@ -13,8 +13,8 @@ const Header = () => {
         <nav className={styles.nav}>
           <Link href="/">
             <h1 className={styles.logo}>
-              Tarefas
-              <span>+</span>
+              Task
+              <span>Mate</span>
             </h1>
           </Link>
           {session?.user && (

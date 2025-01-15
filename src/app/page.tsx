@@ -49,7 +49,7 @@ export default async function Home() {
           />
         </div>
         <h1 className={styles.title}>
-          Sistema feito para você organizar <br /> seus estudos e tarefas
+          Transforme sua lista de tarefas <br /> em metas alcançadas.
         </h1>
 
         <div className={styles.infoContent}>
