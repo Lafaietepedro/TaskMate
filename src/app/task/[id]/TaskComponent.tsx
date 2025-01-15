@@ -14,7 +14,7 @@ interface CommentProps {
   taskId: string;
   user: string;
   name: string;
-  userEmail: string;
+  
 }
 
 interface TaskProps {
@@ -48,8 +48,8 @@ export default function TaskComponent({
       const docRef = await addDoc(collection(db, "comments"), {
         comment: input,
         created: new Date(),
-        user: session?.user?.name,
-        userEmail: session?.user?.email,
+        user: session?.user?.email,
+        name: session?.user?.name,
         taskId: task.taskId,
       });
 
@@ -60,7 +60,7 @@ export default function TaskComponent({
         taskId: task.taskId,
         user: session.user.email,
         name: session.user.name,
-        userEmail: session.user.email,
+        
       };
 
       setComments([...comments, newComment]);
@@ -116,8 +116,8 @@ export default function TaskComponent({
         {comments.map((comment) => (
           <article key={comment.id} className={styles.comment}>
             <div className={styles.headComment}>
-              <label className={styles.commentLabel}>{comment.user}</label>
-              {comment.userEmail === session?.user?.email && (
+              <label className={styles.commentLabel}>{comment.name}</label>
+              {comment.user === session?.user?.email && (
                 <button
                   className={styles.buttonTrash}
                   onClick={() => handleDeleteComment(comment.id)}
