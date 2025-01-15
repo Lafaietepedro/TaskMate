@@ -1,9 +1,7 @@
 import { Metadata } from "next";
-import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
 import TaskComponent from "./TaskComponent";
 import { db } from "@/services/firebaseConnection";
 import { doc, getDoc, query, collection, where, getDocs } from "firebase/firestore";
-import { JSX } from "react";
 
 interface CommentProps {
   id: string;
@@ -56,10 +54,8 @@ async function fetchTaskData(id: string) {
   };
 }
 
-const Page = async (
-  context: GetServerSidePropsContext<{ id: string }>
-): Promise<JSX.Element> => {
-  const task = await fetchTaskData(context.params!.id);
+const Page = async ({ params }: { params: { id: string } }) => {
+  const task = await fetchTaskData(params.id);
   return <TaskComponent task={task} allComments={task.allComments} />;
 };
 
