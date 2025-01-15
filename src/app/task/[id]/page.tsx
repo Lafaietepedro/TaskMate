@@ -9,7 +9,7 @@ interface CommentProps {
   taskId: string;
   user: string;
   name: string;
-  userEmail: string; 
+  userEmail: string;
 }
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -37,7 +37,7 @@ async function fetchTaskData(id: string) {
       user: doc.data()?.user,
       name: doc.data()?.name,
       taskId: doc.data()?.taskId,
-      userEmail: doc.data()?.userEmail
+      userEmail: doc.data()?.userEmail,
     });
   });
 
