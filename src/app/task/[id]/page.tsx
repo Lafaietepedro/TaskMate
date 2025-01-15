@@ -56,8 +56,15 @@ async function fetchTaskData(id: string) {
   };
 }
 
-// Componente de página assíncrono (sem `useRouter`)
-const Page = async ({ params }: { params: { id: string } }) => {
+// Fix the component props type definition
+interface PageProps {
+  params: {
+    id: string
+  }
+}
+
+// Update the component type definition
+const Page = async ({ params }: PageProps) => {
   const task = await fetchTaskData(params.id);
   return <TaskComponent task={task} allComments={task.allComments} />;
 };
