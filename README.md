@@ -1,36 +1,108 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# TaskMate
 
-## Getting Started
+TaskMate é um aplicativo web que ajuda você a gerenciar suas tarefas de forma eficiente. Organize seu dia, conquiste seus objetivos!
 
-First, run the development server:
+TaskMate is a web application that helps you manage your tasks efficiently. Organize your day, achieve your goals!
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🌐 Demo
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Acesse a demo ao vivo [aqui](https://github.com/Lafaietepedro/TaskMate).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Access the live demo [here](https://github.com/Lafaietepedro/TaskMate).
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 📖 Sobre | About
 
-## Learn More
+**Português:**
+TaskMate é um gerenciador de tarefas desenvolvido para facilitar a organização do seu dia a dia. Com uma interface intuitiva, permite adicionar, editar e excluir tarefas de forma simples e rápida.
 
-To learn more about Next.js, take a look at the following resources:
+**English:**
+TaskMate is a task manager designed to simplify your daily organization. With an intuitive interface, it allows you to add, edit, and delete tasks quickly and easily.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🔧 Tecnologias Utilizadas | Technologies Used
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Next.js 15.1.4
+- Firebase
+- React
+- JavaScript
+- CSS
+- HTML
 
-## Deploy on Vercel
+## 🔍 Instalação | Installation
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+**Português:**
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Clone o repositório:
+   ```bash
+   git clone https://github.com/Lafaietepedro/TaskMate.git
+   ```
+
+2. Navegue até o diretório do projeto:
+   ```bash
+   cd TaskMate
+   ```
+
+3. Instale as dependências:
+   ```bash
+   npm install
+   ```
+
+4. Inicie o aplicativo:
+   ```bash
+   npm start
+   ```
+
+**English:**
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Lafaietepedro/TaskMate.git
+   ```
+
+2. Navigate to the project directory:
+   ```bash
+   cd TaskMate
+   ```
+
+3. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+4. Start the application:
+   ```bash
+   npm start
+   ```
+
+## 🔄 Uso | Usage
+
+**Português:**
+- Adicione uma nova tarefa clicando no botão "Adicionar Tarefa".
+- Edite ou exclua tarefas existentes conforme necessário.
+
+**English:**
+- Add a new task by clicking the "Add Task" button.
+- Edit or delete existing tasks as needed.
+
+## ⚙️ Contribuição | Contribution
+
+**Português:**
+Contribuições são bem-vindas! Por favor, siga os passos abaixo para contribuir:
+
+1. Fork o repositório.
+2. Crie um branch para suas modificações: `git checkout -b minha-melhoria`
+3. Commit suas alterações: `git commit -m 'Adiciona uma melhoria'`
+4. Push para o branch: `git push origin minha-melhoria`
+5. Abra um Pull Request.
+
+**English:**
+Contributions are welcome! Please follow the steps below to contribute:
+
+1. Fork the repository.
+2. Create a branch for your modifications: `git checkout -b my-improvement`
+3. Commit your changes: `git commit -m 'Add an improvement'`
+4. Push to the branch: `git push origin my-improvement`
+5. Open a Pull Request.
+
+---
+
+_Projeto criado por [Lafaietepedro](https://github.com/Lafaietepedro)._
