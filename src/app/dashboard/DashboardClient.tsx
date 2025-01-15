@@ -86,7 +86,6 @@ const DashboardClient: React.FC<DashboardClientProps> = ({ session }) => {
 
       setInput("");
       setPublicTask(false);
-      alert("Tarefa registrada com sucesso!");
     } catch (err) {
       console.log(err);
     }
@@ -96,8 +95,6 @@ const DashboardClient: React.FC<DashboardClientProps> = ({ session }) => {
     await navigator.clipboard.writeText(
       `${process.env.NEXT_PUBLIC_URL}/task/${id}`
     );
-
-    alert("Link copiado com sucesso!");
   }
 
   async function handleDeleteTask(id: string) {
