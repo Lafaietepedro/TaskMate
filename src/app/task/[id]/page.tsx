@@ -1,11 +1,9 @@
-"use client"
-
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { Metadata } from "next";
 import TaskComponent from "./TaskComponent";
 import { db } from "@/services/firebaseConnection";
 import { doc, getDoc, query, collection, where, getDocs } from "firebase/firestore";
 
+// Tipo de comentário
 interface CommentProps {
   id: string;
   comment: string;
@@ -15,7 +13,14 @@ interface CommentProps {
   userEmail: string;
 }
 
-const fetchTaskData = async (id: string) => {
+export async function generateMetadata(): Promise<Metadata> {
+  return {
+    title: "Detalhes da tarefa",
+  };
+}
+
+// Função para buscar os dados da tarefa
+async function fetchTaskData(id: string) {
   const docRef = doc(db, "tarefas", id);
   const snapshot = await getDoc(docRef);
 
@@ -49,27 +54,11 @@ const fetchTaskData = async (id: string) => {
     userEmail: snapshot.data()?.userEmail,
     allComments,
   };
-};
+}
 
-const Page = () => {
-  const router = useRouter();
-  const { id } = router.query; // Acessando o parâmetro diretamente pela URL
-  const [task, setTask] = useState<any>(null);
-
-  useEffect(() => {
-    if (id) {
-      fetchTaskData(id as string).then((taskData) => {
-        setTask(taskData);
-      }).catch((error) => {
-        console.error("Erro ao buscar dados da tarefa:", error);
-      });
-    }
-  }, [id]);
-
-  if (!task) {
-    return <div>Carregando...</div>;
-  }
-
+// Componente de página assíncrono (sem `useRouter`)
+const Page = async ({ params }: { params: { id: string } }) => {
+  const task = await fetchTaskData(params.id);
   return <TaskComponent task={task} allComments={task.allComments} />;
 };
 
