@@ -12,21 +12,11 @@ interface CommentProps {
   userEmail: string; 
 }
 
-interface TaskData {
-  tarefa: string;
-  public: boolean;
-  created: string;
-  user: string;
-  taskId: string;
-  userEmail: string;
-  allComments: CommentProps[];
-}
-
 export const metadata: Metadata = {
   title: "Detalhes da tarefa",
 };
 
-async function fetchTaskData(id: string): Promise<TaskData> {
+async function fetchTaskData(id: string) {
   const docRef = doc(db, "tarefas", id);
   const snapshot = await getDoc(docRef);
 
@@ -62,13 +52,14 @@ async function fetchTaskData(id: string): Promise<TaskData> {
   };
 }
 
-interface PageProps {
+type Props = {
   params: {
     id: string;
-  }
-}
+  };
+  searchParams: { [key: string]: string | string[] | undefined };
+};
 
-export default async function Task({ params }: PageProps) {
+export default async function Task({ params, searchParams }: Props) {
   const task = await fetchTaskData(params.id);
   return <TaskComponent task={task} allComments={task.allComments} />;
 }
