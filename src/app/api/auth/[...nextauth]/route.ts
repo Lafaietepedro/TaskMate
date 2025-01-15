@@ -13,10 +13,6 @@ export const authOptions: AuthOptions = {
   secret: process.env.JWT_SECRET as string,
 };
 
-// ... rest of the file remains the same ...
-
-// Crie o handler com as opções do NextAuth
 const handler = NextAuth(authOptions);
 
-// Exporte as rotas GET e POST
 export { handler as GET, handler as POST };
