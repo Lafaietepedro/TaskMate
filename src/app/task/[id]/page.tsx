@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { NextPage } from "next";
 import TaskComponent from "./TaskComponent";
 import { db } from "@/services/firebaseConnection";
 import { doc, getDoc, query, collection, where, getDocs } from "firebase/firestore";
@@ -54,10 +55,11 @@ async function fetchTaskData(id: string) {
   };
 }
 
-export default async function Page(props: {
-  params: { id: string },
-  searchParams: Record<string, string | string[] | undefined>
-}) {
-  const task = await fetchTaskData(props.params.id);
+const Page = async (context: {
+  params: { id: string };
+}) => {
+  const task = await fetchTaskData(context.params.id);
   return <TaskComponent task={task} allComments={task.allComments} />;
-}
+};
+
+export default Page;
