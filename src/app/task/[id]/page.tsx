@@ -37,7 +37,7 @@ async function fetchTaskData(id: string) {
       user: doc.data()?.user,
       name: doc.data()?.name,
       taskId: doc.data()?.taskId,
-      userEmail: doc.data()?.userEmail,
+      userEmail: doc.data()?.userEmail
     });
   });
 
@@ -54,7 +54,7 @@ async function fetchTaskData(id: string) {
   };
 }
 
-// Componente da página
+// Tipagem correta do parâmetro params
 const Page = async ({ params }: { params: { id: string } }) => {
   const task = await fetchTaskData(params.id);
   return <TaskComponent task={task} allComments={task.allComments} />;
