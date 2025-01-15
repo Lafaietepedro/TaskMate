@@ -56,12 +56,12 @@ async function fetchTaskData(id: string) {
   };
 }
 
-// Componente de página assíncrono (sem `useRouter`)
 const Page = async ({
   params,
+  searchParams,
 }: {
-  params: { id: string },
-  searchParams?: { [key: string]: string | string[] | undefined }
+  params: { id: string };
+  searchParams?: { [key: string]: string | string[] | undefined };
 }) => {
   const task = await fetchTaskData(params.id);
   return <TaskComponent task={task} allComments={task.allComments} />;
