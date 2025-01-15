@@ -3,6 +3,7 @@ import TaskComponent from "./TaskComponent";
 import { db } from "@/services/firebaseConnection";
 import { doc, getDoc, query, collection, where, getDocs } from "firebase/firestore";
 
+// Tipos de comentários
 interface CommentProps {
   id: string;
   comment: string;
@@ -18,6 +19,7 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
+// Função para buscar os dados da tarefa
 async function fetchTaskData(id: string) {
   const docRef = doc(db, "tarefas", id);
   const snapshot = await getDoc(docRef);
@@ -37,7 +39,7 @@ async function fetchTaskData(id: string) {
       user: doc.data()?.user,
       name: doc.data()?.name,
       taskId: doc.data()?.taskId,
-      userEmail: doc.data()?.userEmail
+      userEmail: doc.data()?.userEmail,
     });
   });
 
@@ -54,8 +56,9 @@ async function fetchTaskData(id: string) {
   };
 }
 
-// Tipagem correta do parâmetro params
+// Componente de página assíncrono
 const Page = async ({ params }: { params: { id: string } }) => {
+  // Aqui, `params.id` vai ser utilizado para buscar os dados da tarefa
   const task = await fetchTaskData(params.id);
   return <TaskComponent task={task} allComments={task.allComments} />;
 };
