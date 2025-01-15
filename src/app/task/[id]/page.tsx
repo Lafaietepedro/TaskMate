@@ -52,14 +52,11 @@ async function fetchTaskData(id: string) {
   };
 }
 
-type Props = {
-  params: {
-    id: string;
-  };
-  searchParams: { [key: string]: string | string[] | undefined };
-};
-
-export default async function Task({ params, searchParams }: Props) {
-  const task = await fetchTaskData(params.id);
+export default async function Task({
+  params: { id },
+}: {
+  params: { id: string }
+}) {
+  const task = await fetchTaskData(id);
   return <TaskComponent task={task} allComments={task.allComments} />;
 }
