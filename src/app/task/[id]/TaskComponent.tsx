@@ -65,7 +65,6 @@ export default function TaskComponent({
 
       setComments([...comments, newComment]);
       setInput("");
-      alert("Comentário enviado com sucesso!");
     } catch (err) {
       console.error(err);
     }
