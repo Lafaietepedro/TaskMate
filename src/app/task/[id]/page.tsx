@@ -1,26 +1,21 @@
-import { Metadata } from "next";
+"use client"
+
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import TaskComponent from "./TaskComponent";
 import { db } from "@/services/firebaseConnection";
 import { doc, getDoc, query, collection, where, getDocs } from "firebase/firestore";
 
-// Tipos de comentários
 interface CommentProps {
   id: string;
   comment: string;
   taskId: string;
   user: string;
   name: string;
-  userEmail: string; 
+  userEmail: string;
 }
 
-export async function generateMetadata(): Promise<Metadata> {
-  return {
-    title: "Detalhes da tarefa",
-  };
-}
-
-// Função para buscar os dados da tarefa
-async function fetchTaskData(id: string) {
+const fetchTaskData = async (id: string) => {
   const docRef = doc(db, "tarefas", id);
   const snapshot = await getDoc(docRef);
 
@@ -54,12 +49,27 @@ async function fetchTaskData(id: string) {
     userEmail: snapshot.data()?.userEmail,
     allComments,
   };
-}
+};
 
-// Componente de página assíncrono
-const Page = async ({ params }: { params: { id: string } }) => {
-  // Aqui, `params.id` vai ser utilizado para buscar os dados da tarefa
-  const task = await fetchTaskData(params.id);
+const Page = () => {
+  const router = useRouter();
+  const { id } = router.query; // Acessando o parâmetro diretamente pela URL
+  const [task, setTask] = useState<any>(null);
+
+  useEffect(() => {
+    if (id) {
+      fetchTaskData(id as string).then((taskData) => {
+        setTask(taskData);
+      }).catch((error) => {
+        console.error("Erro ao buscar dados da tarefa:", error);
+      });
+    }
+  }, [id]);
+
+  if (!task) {
+    return <div>Carregando...</div>;
+  }
+
   return <TaskComponent task={task} allComments={task.allComments} />;
 };
 
