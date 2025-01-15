@@ -3,7 +3,7 @@ import TaskComponent from "./TaskComponent";
 import { db } from "@/services/firebaseConnection";
 import { doc, getDoc, query, collection, where, getDocs } from "firebase/firestore";
 
-// Tipo de comentário
+// Define the shape of a comment
 interface CommentProps {
   id: string;
   comment: string;
@@ -13,13 +13,14 @@ interface CommentProps {
   userEmail: string;
 }
 
-export async function generateMetadata(): Promise<Metadata> {
+// Metadata for the page
+export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
   return {
-    title: "Detalhes da tarefa",
+    title: `Detalhes da tarefa ${params.id}`,
   };
 }
 
-// Função para buscar os dados da tarefa
+// Function to fetch task data
 async function fetchTaskData(id: string) {
   const docRef = doc(db, "tarefas", id);
   const snapshot = await getDoc(docRef);
@@ -35,36 +36,42 @@ async function fetchTaskData(id: string) {
   snapshotComments.forEach((doc) => {
     allComments.push({
       id: doc.id,
-      comment: doc.data()?.comment,
-      user: doc.data()?.user,
-      name: doc.data()?.name,
-      taskId: doc.data()?.taskId,
-      userEmail: doc.data()?.userEmail,
+      comment: doc.data()?.comment ?? "",
+      user: doc.data()?.user ?? "",
+      name: doc.data()?.name ?? "",
+      taskId: doc.data()?.taskId ?? "",
+      userEmail: doc.data()?.userEmail ?? "",
     });
   });
 
-  const milliseconds = snapshot.data()?.created?.seconds * 1000;
+  const createdTimestamp = snapshot.data()?.created?.seconds;
+  const createdDate = createdTimestamp
+    ? new Date(createdTimestamp * 1000).toLocaleDateString()
+    : "Data desconhecida";
 
   return {
-    tarefa: snapshot.data()?.tarefa,
-    public: snapshot.data()?.public,
-    created: new Date(milliseconds).toLocaleDateString(),
-    user: snapshot.data()?.user,
+    tarefa: snapshot.data()?.tarefa ?? "",
+    public: snapshot.data()?.public ?? false,
+    created: createdDate,
+    user: snapshot.data()?.user ?? "",
     taskId: id,
-    userEmail: snapshot.data()?.userEmail,
+    userEmail: snapshot.data()?.userEmail ?? "",
     allComments,
   };
 }
 
-const Page = async ({
-  params,
-  searchParams,
-}: {
-  params: { id: string };
-  searchParams?: { [key: string]: string | string[] | undefined };
-}) => {
+// Define a uniquely named interface for props
+interface TaskPageProps {
+  params: {
+    id: string;
+  };
+  searchParams?: {
+    [key: string]: string | string[] | undefined;
+  };
+}
+
+// Define the Page component as an async function
+export default async function Page({ params, searchParams }: TaskPageProps) {
   const task = await fetchTaskData(params.id);
   return <TaskComponent task={task} allComments={task.allComments} />;
-};
-
-export default Page;
+}
