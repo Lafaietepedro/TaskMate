@@ -2,7 +2,6 @@ import { Metadata } from "next";
 import TaskComponent from "./TaskComponent";
 import { db } from "@/services/firebaseConnection";
 import { doc, getDoc, query, collection, where, getDocs } from "firebase/firestore";
-import { PageProps } from "next/types";
 
 // Tipo de comentário
 interface CommentProps {
