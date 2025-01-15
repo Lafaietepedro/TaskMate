@@ -9,7 +9,7 @@ interface CommentProps {
   taskId: string;
   user: string;
   name: string;
-  userEmail: string;
+  userEmail: string; 
 }
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -54,6 +54,7 @@ async function fetchTaskData(id: string) {
   };
 }
 
+// Componente da página
 const Page = async ({ params }: { params: { id: string } }) => {
   const task = await fetchTaskData(params.id);
   return <TaskComponent task={task} allComments={task.allComments} />;
